@@ -5,7 +5,7 @@ import sys
 from geometry_msgs.msg import Twist
 
 def update(lx,ly,lz,ax,ay,az):
-  pub = rospy.Publisher('turtle1/cmd_vel', Twist, queue_size=1)
+  
 
   twist = Twist()
   twist.linear.x = lx
@@ -18,9 +18,9 @@ def update(lx,ly,lz,ax,ay,az):
   pub.publish(twist)	
 
 
-
 if __name__=="__main__":
     rospy.init_node('move_bot', anonymous=True)
+    pub = rospy.Publisher('turtle1/cmd_vel', Twist, queue_size=1)
     try:
         rospy.loginfo('Reading from keyboard')
         rospy.loginfo('Press d-> RIGHT a->LEFT w->UP x->DOWN and to stop press s')
@@ -29,19 +29,19 @@ if __name__=="__main__":
         #k=raw_input('enter the key:')
             key = getkey()
             if key == 'd':
-                update(0,0,0,0,0,3)
+                update(0,0,0,0,0,10)
                 rospy.loginfo('RIGHT')
   
             elif key == 'a':
-                update(0,0,0,0,0,-3)
+                update(0,0,0,0,0,-10)
                 rospy.loginfo('LEFT')
 
             elif key == 'w':
-                update(5,0,0,0,0,0)
+                update(10,0,0,0,0,0)
                 rospy.loginfo('UP')
 
             elif key == 'x':
-                update(-5,0,0,0,0,0)
+                update(-10,0,0,0,0,0)
                 rospy.loginfo('DOWN')
 
             elif key=='s':
